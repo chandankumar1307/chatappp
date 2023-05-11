@@ -25,6 +25,13 @@ app.get('/', (req, res) => {
 
 io.on("connection", (socket) => {
     console.log("Connection is ready");
+    console.log(socket.id);
+    socket.on('send-message', (data) => {
+        console.log("message received -> ", data.message);
+        socket.emit("message-from-server", data);
+
+
+    })
 })
 
 httpServer.listen(5000, () => {
